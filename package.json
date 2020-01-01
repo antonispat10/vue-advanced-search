@@ -1,14 +1,33 @@
 {
-  "name": "app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "vue-advanced-search",
+  "version": "0.1.15",
+  "private": false,
+  "author": "Antonis Paterakis <antonispat10@gmail.com>",
+  "license": "MIT",
+  "main": "./dist/AdvancedSearch.umd.js",
+  "unpkg": "dist/AdvancedSearch.umd.min.js",
+  "keywords": [
+    "vue",
+    "autocomplete",
+    "search"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:npm": "vue-cli-service build --target lib --name AdvancedSearch src/AdvancedSearch.vue",
     "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antonispat10/vue-advanced-search"
   },
   "dependencies": {
     "core-js": "^3.4.3",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "lodash": "^4.17.15",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -29,7 +48,9 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

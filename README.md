@@ -1,24 +1,68 @@
-# app
+# vue-advanced-search
 
-## Project setup
-```
-yarn install
-```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Features:
+* Autocomplete search
+* Single select
+* Multiple select
 
-### Compiles and minifies for production
-```
-yarn build
+## Install & basic usage
+
+```bash
+npm install vue-advanced-search
 ```
 
-### Lints and fixes files
-```
-yarn lint
+```vue
+<template>
+  <div>
+    <advanced-search
+      v-model="model"
+      :options="options">
+    </advanced-search>
+  </div>
+</template>
+
+<script>
+  import Advanced-Search from 'vue-advanced-search'
+  export default {
+    components: { AdvancedSearch },
+    data () {
+      return {
+        model: null,
+        options: [
+            { label: 'label1', value: 'value1' }
+        ]
+      }
+    }
+  }
+</script>
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Props
+
+| prop             | type               | default                | description                                                                                                                                                                                              |
+|------------------|--------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| value            | Object||Array||String||Integer |                        | The selected value(s)
+| options          | Array                          | []                     | Array of available options: If array of objects, label will be option.label
+| placeholder      | String | 'Search' || 'Select'                                | The placeholder attribute
+
+
+# Events
+
+| event           | attributes                                                        | description                                       |
+|-----------------|----------------------------------------------------------------------------|---------------------------------------------------|
+| input           | (value)                                                 | triggers for any change to 'this.value'
+
+# Slots
+
+
+| slot       | description                                                                     |
+|------------|---------------------------------------------------------------------------------|
+| option     | Slot for custom option                                                                           
+
+
+## Contributing
+
+``` bash
+# run it at localhost:8080
+npm run server
