@@ -15,7 +15,7 @@
     "search"
   ],
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve src/dev.js",
     "build": "vue-cli-service build --target lib --name AdvancedSearch  src/AdvancedSearch.vue",
     "lint": "vue-cli-service lint"
   },

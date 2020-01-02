@@ -17,7 +17,7 @@ export default {
     },
     data () {
       return {
-        clickedOutside: false,
+        clickedOutside: true,
         active: -1,
         model: ''
       }

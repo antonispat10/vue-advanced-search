@@ -13,7 +13,7 @@ export default {
     components: { AdvancedSearch },
     data () {
       return {
-        value: 'ew',
+        value: 'Option1_value',
         options: [
           { label: 'option1', value: 'Option1_value'},
           { label: 'option2', value: 'Option2_value'}
