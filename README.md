@@ -3,13 +3,14 @@
 
 ## Features:
 * Autocomplete search
-* Single select
-* Multiple select
 
 ## Install & basic usage
 
 ```bash
 npm install vue-advanced-search
+
+Add the css into your project 
+<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
 ```
 
 ```vue
@@ -36,6 +37,8 @@ npm install vue-advanced-search
     }
   }
 </script>
+
+<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
 ```
 
 # Props

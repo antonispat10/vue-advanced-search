@@ -24,5 +24,5 @@
 <script src="./AdvancedSearch.js"></script>
 
 <style lang="less">
-  @import './AdvancedSearch.less'; 
+  @import './AdvancedSearch.less';
 </style>

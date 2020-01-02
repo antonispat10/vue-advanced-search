@@ -1,11 +1,14 @@
 {
   "name": "vue-advanced-search",
-  "version": "0.1.15",
+  "version": "0.1.36",
   "private": false,
   "author": "Antonis Paterakis <antonispat10@gmail.com>",
   "license": "MIT",
-  "main": "./dist/AdvancedSearch.umd.js",
+  "main": "dist/AdvancedSearch.umd.js",
   "unpkg": "dist/AdvancedSearch.umd.min.js",
+  "files": [
+    "dist/*"
+  ],
   "keywords": [
     "vue",
     "autocomplete",
@@ -13,8 +16,7 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build:npm": "vue-cli-service build --target lib --name AdvancedSearch src/AdvancedSearch.vue",
+    "build": "vue-cli-service build --target lib --name AdvancedSearch  src/AdvancedSearch.vue",
     "lint": "vue-cli-service lint"
   },
   "repository": {
