@@ -45,9 +45,9 @@ Add the css into your project
 
 | prop             | type               | default                | description                                                                                                                                                                                              |
 |------------------|--------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| value            | Object||Array||String||Integer |                        | The selected value(s)
+| value            | String/Integer/Array/Object    | ''                     | The selected value(s)
 | options          | Array                          | []                     | Array of available options: If array of objects, label will be option.label
-| placeholder      | String | 'Search' || 'Select'                                | The placeholder attribute
+| placeholder      | String                         | 'Search'               | The placeholder attribute
 
 
 # Events
