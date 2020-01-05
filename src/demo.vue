@@ -1,9 +1,20 @@
 <template lang="pug">
   #app
-    advanced-search(
-      v-model="value"
-      :options="options"
-    )
+    .examples
+      .example.autocomplete-search
+        .title Autocomplete search
+        advanced-search(
+          v-model="value"
+          :options="options"
+        )
+      .example.multiple-select-with-search
+        .title Multiple select with search
+        advanced-search(
+          v-model="multipleValue"
+          :options="options"
+          select
+          multiple
+        )  
 </template>
 
 <script>
@@ -14,9 +25,11 @@ export default {
     data () {
       return {
         value: 'Option1_value',
+        multipleValue: '',
         options: [
           { label: 'option1', value: 'Option1_value'},
-          { label: 'option2', value: 'Option2_value'}
+          { label: 'option2', value: 'Option2_value'},
+          { label: 'option3', value: 'Option3_value'}
         ]
       }
     }
@@ -24,5 +37,16 @@ export default {
 </script>
 
 <style lang="less">
-  
+  .examples {
+    display: flex;
+    justify-content: center;
+    .example {
+      margin-right: 100px;
+      .title {
+        margin-bottom: 10px;
+        font-weight: 600;
+        font-family: "Source Sans Pro";
+      }
+    }
+  }
 </style>

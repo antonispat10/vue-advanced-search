@@ -2,11 +2,14 @@
   .advanced-search-input(@keyup="onKeyPressed")
     .advanced-input-container
       .advanced-input-section
+        .labels(v-if="!enableInput" @click="onLabelClick")
+          span {{ displayLabels || this.placeholder }}
         input.advanced-input(
+          v-if="enableInput"
           @click="$event.stopPropagation()"
           @focus="onFocus"
           type="text"
-          v-model="model"
+          v-model="search"
           :placeholder="placeholder"
         )
     .search(v-if="!clickedOutside")

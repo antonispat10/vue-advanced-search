@@ -1,5 +1,6 @@
 .advanced-search-input {
   width: 200px;
+  font-family: "Source Sans Pro";
   .advanced-input-container {
     width: 100%;
     .advanced-input-section {
@@ -10,7 +11,8 @@
       height: 34px;
       text-align: left;
       color: #35495e;
-      .advanced-input {
+      .advanced-input, .labels {
+        font-family: "Source Sans Pro";
         width: 100%;
         box-sizing: border-box;
         height: 100%;
@@ -19,6 +21,13 @@
         background: #fff;
         font-size: 14px;
         outline: unset;
+        &::placeholder, span {
+          color: #e8e8e8;
+        }
+        span {
+          top: 7px;
+          position: relative;
+        }
       }
     }
   }
@@ -44,6 +53,9 @@
         }
         &.active {
           background: #e8e8e8;
+        }
+        &.selected {
+          background: red;
         }
       }
     }
