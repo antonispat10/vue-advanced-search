@@ -39,7 +39,10 @@ export default {
     mounted () {
       window.addEventListener('click', this.onClickOutside)
       this.labels = this.getValues()
-      if (this.select && this.multiple) this.values = [this.value]
+      if (this.select && this.multiple) {
+        if (this.value.length) this.values = [this.value]
+        else this.values = []
+      }
       else this.values = this.value
     },
     computed: {
@@ -50,22 +53,30 @@ export default {
       },
       selectedOptions () {
         let selected = []
-        this.options.map((option, index) => {
+        this.options.map((option) => {
           if (this.values.indexOf(option.value) !== -1) {
-            selected.push(index)
+            selected.push(option.value)
           }
         })
         return selected
       },
       displayLabels () {
-        if (Array.isArray(this.labels)) {
+        if (Array.isArray(this.labels) && this.labels.length) {
           return this.labels.join(', ')
         }
-        else return this.labels
+        return ''
       }
     },
     methods: {
+      onInputClick ($event) {
+       $event.stopPropagation()
+       this.active = -1
+      },
       onLabelClick ($event) {
+        this.$nextTick(() => {
+          this.$refs.advancedInput.style.display = 'block'
+          this.$refs.advancedInput.focus()
+        })
         $event.stopPropagation()
         this.enableInput = true
         this.clickedOutside = false
@@ -74,23 +85,25 @@ export default {
         this.clickedOutside = true
         this.active = -1
         this.enableInput = false
+        this.$refs.advancedInput.style.display = 'none'
         $event.stopPropagation()
       },
       onFocus () {
         this.clickedOutside = false
       },
-      setActiveClass (i) {
+      setActiveClass (i, option) {
         let classList = []
-        if (this.selectedOptions.indexOf(i) !== -1) {
+        if (this.selectedOptions.indexOf(option.value) !== -1) {
           classList.push('selected')
         }
         if (this.active === i) classList.push('active')
         return classList.join(' ')
       },
-      onClick (index) {
+      onOptionClick (event, index) {
+        event.stopPropagation()
         if (this.select) {
           if (this.multiple) {
-            if (!Array.isArray(this.labels)) this.labels = [this.labels]
+            if (!Array.isArray(this.labels)) this.labels = []
             const label = this.getValues(this.autoCompleteOptions[index].value)
             const findIndex = this.values.indexOf(this.autoCompleteOptions[index].value)
             if (findIndex === -1) {
@@ -103,32 +116,42 @@ export default {
           }
         } else if (!this.select || (this.select && !this.multiple)) {
           const label = this.getValues(this.autoCompleteOptions[index].value)
-          this.labels = label
+          this.labels = [label]
           this.values = this.autoCompleteOptions[index].value
+          this.clickedOutside = true
+          this.enableInput = false
+          this.$refs.advancedInput.style.display = 'none'
         }
-        this.enableInput = false
         this.$emit('input', this.values)
       },
       onKeyPressed (event) {
+        event.stopPropagation()
           // Enter
         if (event.keyCode === 13) {
-          this.clickedOutside = true
           let option = this.autoCompleteOptions[this.active] || ''
           if (this.select) {
             if (this.multiple) {
               this.clickedOutside = false
               if (!Array.isArray(this.labels)) this.labels = []
               const label = this.getValues(option.value)
-              this.labels.push(label)
-              this.values.push(option.value)
+              const findIndex = this.values.indexOf(option.value)
+              if (findIndex === -1) {
+                this.labels.push(label)
+                this.values.push(option.value)
+              } else {
+                this.values.splice(findIndex, 1)
+                this.labels.splice(findIndex, 1)
+              }
             }
             
           } else if (!this.select || (this.select && !this.multiple)) {
             const label = this.getValues(option.value)
-            this.labels = label
+            this.labels = [label]
             this.values = option.value
+            this.clickedOutside = true
+            this.enableInput = false
+            this.$refs.advancedInput.style.display = 'none'
           }
-          this.enableInput = false
           this.$emit('input', this.values)
         }
         // Down
@@ -151,7 +174,7 @@ export default {
           })
         }
         const active = this.options.find((option) => option.value === value)
-        if (active) return active.label
+        if (active) return [active.label]
         return ''
       }
     },

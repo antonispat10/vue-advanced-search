@@ -2,23 +2,26 @@
   .advanced-search-input(@keyup="onKeyPressed")
     .advanced-input-container
       .advanced-input-section
-        .labels(v-if="!enableInput" @click="onLabelClick")
-          span {{ displayLabels || this.placeholder }}
-        input.advanced-input(
-          v-if="enableInput"
-          @click="$event.stopPropagation()"
-          @focus="onFocus"
-          type="text"
-          v-model="search"
-          :placeholder="placeholder"
-        )
+        .label(v-if="!enableInput" @click="onLabelClick")
+          slot(name="label")
+            span(v-if="labels.length > 1") {{ labels.length }} options selected 
+            span(v-else) {{ displayLabels || this.placeholder }}
+        slot(name="input")    
+          input.advanced-input(
+            ref="advancedInput"
+            @click="onInputClick"
+            @focus="onFocus"
+            type="text"
+            v-model="search"
+            :placeholder="placeholder"
+          )
     .search(v-if="!clickedOutside")
-      .options(:class="{ 'available-options': autoCompleteOptions }")
+      .options(:class="{ 'available-options': autoCompleteOptions, 'empty-results': !autoCompleteOptions.length }")
         .row(
           v-for="(option, index) in autoCompleteOptions"
           @mouseover="active = index"
-          @click="onClick(index)"
-          :class="setActiveClass(index)")
+          @click="onOptionClick($event, index)"
+          :class="setActiveClass(index, option)")
           slot(name="option")
             .option
               .title {{ option.label }}

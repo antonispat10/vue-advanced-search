@@ -2,13 +2,13 @@
   #app
     .examples
       .example.autocomplete-search
-        .title Autocomplete search
+        .demo-title Autocomplete search
         advanced-search(
           v-model="value"
           :options="options"
         )
       .example.multiple-select-with-search
-        .title Multiple select with search
+        .demo-title Multiple select with search
         advanced-search(
           v-model="multipleValue"
           :options="options"
@@ -42,7 +42,7 @@ export default {
     justify-content: center;
     .example {
       margin-right: 100px;
-      .title {
+      .demo-title {
         margin-bottom: 10px;
         font-weight: 600;
         font-family: "Source Sans Pro";

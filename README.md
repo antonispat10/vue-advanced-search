@@ -100,6 +100,8 @@ Add the css into your project
 
 | slot       | description                                                                     |
 |------------|---------------------------------------------------------------------------------|
+| input      | Slot for the input                                               
+| label      | Slot for the label displayed                                                                         
 | option     | Slot for custom option                                                                           
 
 

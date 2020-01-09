@@ -11,7 +11,10 @@
       height: 34px;
       text-align: left;
       color: #35495e;
-      .advanced-input, .labels {
+      .advanced-input {
+        display: none;
+      }
+      .advanced-input, .label {
         font-family: "Source Sans Pro";
         width: 100%;
         box-sizing: border-box;
@@ -21,6 +24,7 @@
         background: #fff;
         font-size: 14px;
         outline: unset;
+        padding-left: 2px;
         &::placeholder, span {
           color: #e8e8e8;
         }
@@ -39,6 +43,9 @@
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
       }
+      &.empty-results {
+        display: none;
+      }
       .row {
         height: 34px;
         background: #fff;
@@ -55,7 +62,10 @@
           background: #e8e8e8;
         }
         &.selected {
-          background: red;
+          background: #5988ff;
+        }
+        &.selected.active {
+          background: #f05f52;
         }
       }
     }
