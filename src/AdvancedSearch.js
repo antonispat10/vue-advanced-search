@@ -56,7 +56,7 @@ export default {
       selectedOptions () {
         let selected = []
         this.options.map((option) => {
-          if (this.values && this.values.indexOf(option.value) !== -1) {
+          if (Array.isArray(this.values) && this.values.indexOf(option.value) !== -1) {
             selected.push(option.value)
           }
         })

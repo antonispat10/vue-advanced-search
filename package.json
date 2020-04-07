@@ -24,6 +24,7 @@
     "url": "https://github.com/antonispat10/vue-advanced-search"
   },
   "dependencies": {
+    "babel-plugin-root-import": "^6.5.0",
     "core-js": "^3.4.3",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
