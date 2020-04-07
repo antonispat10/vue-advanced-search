@@ -1,4 +1,5 @@
 .advanced-search-input {
+  position: relative;
   width: 200px;
   font-family: "Source Sans Pro";
   .advanced-input-container {
@@ -36,13 +37,13 @@
     }
   }
   .search {
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    box-sizing: border-box;
     .options {
-      &.available-options {
-        border: 1px solid #e8e8e8;
-        border-top: none;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
       &.empty-results {
         display: none;
       }

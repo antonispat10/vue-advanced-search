@@ -14,7 +14,7 @@ export default {
         required: false,
         default: 'Search'
       },
-      select: {
+      selectMode: {
         type: Boolean,
         required: false,
         default: false
@@ -39,7 +39,7 @@ export default {
     mounted () {
       window.addEventListener('click', this.onClickOutside)
       this.labels = this.getValues()
-      if (this.select && this.multiple) {
+      if (this.selectMode && this.multiple) {
         if (this.value.length) this.values = [this.value]
         else this.values = []
       }
@@ -47,14 +47,16 @@ export default {
     },
     computed: {
       autoCompleteOptions () {
-        return this.options.map(v => {
+        const options = this.options.map(v => {
           if (v.label.indexOf(this.search) !== -1) return v
         }).filter(v => v)
+        if (!options.length) return [{ value: '', label: 'No available options'}]
+        return options
       },
       selectedOptions () {
         let selected = []
         this.options.map((option) => {
-          if (this.values.indexOf(option.value) !== -1) {
+          if (this.values && this.values.indexOf(option.value) !== -1) {
             selected.push(option.value)
           }
         })
@@ -64,7 +66,7 @@ export default {
         if (Array.isArray(this.labels) && this.labels.length) {
           return this.labels.join(', ')
         }
-        return ''
+        return this.search
       }
     },
     methods: {
@@ -79,7 +81,7 @@ export default {
         })
         $event.stopPropagation()
         this.enableInput = true
-        this.clickedOutside = false
+        // if (this.selectMode) this.clickedOutside = false
       },
       onClickOutside ($event) {
         this.clickedOutside = true
@@ -89,7 +91,11 @@ export default {
         $event.stopPropagation()
       },
       onFocus () {
-        this.clickedOutside = false
+        if (this.selectMode) this.clickedOutside = false
+        if (!this.multiple) {
+          if (this.labels.length) this.search = ''
+          this.labels = ''
+        }
       },
       setActiveClass (i, option) {
         let classList = []
@@ -101,12 +107,14 @@ export default {
       },
       onOptionClick (event, index) {
         event.stopPropagation()
-        if (this.select) {
+        if (this.selectMode) {
           if (this.multiple) {
             if (!Array.isArray(this.labels)) this.labels = []
             const label = this.getValues(this.autoCompleteOptions[index].value)
             const findIndex = this.values.indexOf(this.autoCompleteOptions[index].value)
             if (findIndex === -1) {
+              console.log(2, findIndex)
+              if (!this.autoCompleteOptions[index].value) return
               this.labels.push(label)
               this.values.push(this.autoCompleteOptions[index].value)
             } else {
@@ -114,22 +122,25 @@ export default {
               this.labels.splice(findIndex, 1)
             }
           }
-        } else if (!this.select || (this.select && !this.multiple)) {
+        } else if (!this.selectMode || (this.selectMode && !this.multiple)) {
           const label = this.getValues(this.autoCompleteOptions[index].value)
           this.labels = [label]
           this.values = this.autoCompleteOptions[index].value
+          if (!this.values) return
           this.clickedOutside = true
           this.enableInput = false
           this.$refs.advancedInput.style.display = 'none'
         }
-        this.$emit('input', this.values)
+        this.$emit('select', this.values)
       },
       onKeyPressed (event) {
         event.stopPropagation()
+        if (this.search) this.clickedOutside = false
           // Enter
         if (event.keyCode === 13) {
           let option = this.autoCompleteOptions[this.active] || ''
-          if (this.select) {
+          if (!option.value) return
+          if (this.selectMode) {
             if (this.multiple) {
               this.clickedOutside = false
               if (!Array.isArray(this.labels)) this.labels = []
@@ -144,15 +155,16 @@ export default {
               }
             }
             
-          } else if (!this.select || (this.select && !this.multiple)) {
+          } else if (!this.selectMode || (this.selectMode && !this.multiple)) {
             const label = this.getValues(option.value)
-            this.labels = [label]
-            this.values = option.value
+            this.labels = label ? [label] : [this.search]
+            this.values = option.value || this.search
             this.clickedOutside = true
             this.enableInput = false
             this.$refs.advancedInput.style.display = 'none'
           }
-          this.$emit('input', this.values)
+          console.log('sel', option.value, this.values, this.search)
+          this.$emit('select', this.values)
         }
         // Down
         if (event.keyCode === 40) {
@@ -165,8 +177,7 @@ export default {
         this.$emit('keyup', event)
       },
       getValues (value) {
-        if (!value) value = this.value
-        if (this.select && this.multiple && Array.isArray(value)) {
+        if (this.selectMode && this.multiple && Array.isArray(value)) {
           return value.map((val) => {
             const option = this.options.find((option) => option.value === val)
             if (!option) return ''

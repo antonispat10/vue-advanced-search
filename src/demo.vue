@@ -12,7 +12,7 @@
         advanced-search(
           v-model="multipleValue"
           :options="options"
-          select
+          selectMode
           multiple
         )  
 </template>

@@ -85,7 +85,7 @@ Add the css into your project
 | value            | String/Integer/Array/Object    | ''                     | The selected value(s)
 | options          | Array                          | []                     | Array of available options: If array of objects, label will be option.label
 | placeholder      | String                         | 'Search'               | The placeholder attribute
-| select           | Boolean                        | false                  | Enables input select
+| selectMode       | Boolean                        | false                  | Enables input select
 | multiple         | Boolean                        | false                  | Enable multiple select
 
 
@@ -94,6 +94,7 @@ Add the css into your project
 | event           | attributes                                                        | description                                       |
 |-----------------|----------------------------------------------------------------------------|---------------------------------------------------|
 | input           | (value)                                                 | triggers for any change to 'this.value'
+| select          | (value)                                                 | triggers after selecting an option
 
 # Slots
 
