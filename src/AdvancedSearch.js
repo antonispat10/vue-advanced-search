@@ -67,7 +67,15 @@ export default {
           return this.labels.join(', ')
         }
         return this.search
-      }
+      },
+      inputValue: {
+        get() {
+          return this.value
+        },
+        set(val) {
+          this.$emit('input', val)
+        }
+      },
     },
     methods: {
       onInputClick ($event) {
@@ -129,8 +137,10 @@ export default {
           if (!this.values) return
           this.clickedOutside = true
           this.enableInput = false
-          this.$refs.advancedInput.style.display = 'none'
+          // this.$refs.advancedInput.style.display = 'none'
         }
+        this.inputValue = this.values
+        this.$refs.advancedInput.style.display = 'none'
         this.$emit('select', this.values)
       },
       onKeyPressed (event) {
