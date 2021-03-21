@@ -9,7 +9,7 @@
 ## Install & basic usage
 
 ```bash
-npm install vue-advanced-search
+npm install vue-advanced-search -S
 
 Add the css into your project 
 <style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
@@ -22,13 +22,12 @@ Add the css into your project
     <advanced-search
       v-model="model"
       :options="options"
-    >
-    </advanced-search>
+    />
   </div>
 </template>
 
 <script>
-  import Advanced-Search from 'vue-advanced-search'
+  import AdvancedSearch from 'vue-advanced-search'
   export default {
     components: { AdvancedSearch },
     data () {
@@ -54,13 +53,12 @@ Add the css into your project
       :options="options"
       select
       multiple
-    >
-    </advanced-search>
+    />
   </div>
 </template>
 
 <script>
-  import Advanced-Search from 'vue-advanced-search'
+  import AdvancedSearch from 'vue-advanced-search'
   export default {
     components: { AdvancedSearch },
     data () {
@@ -77,6 +75,37 @@ Add the css into your project
 </script>
 <style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
 ```
+
+### Example 3: Autocomplete search (async component)
+```vue
+<template>
+  <div>
+    <advanced-search
+      v-model="model"
+      :options="options"
+    />
+  </div>
+</template>
+
+<script>
+  export default {
+    components: {
+        AdvancedSearch: () => import('vue-advanced-search'),
+    },
+    data () {
+      return {
+        model: null,
+        options: [
+            { label: 'label1', value: 'value1' },
+            { label: 'label2', value: 'value2' }
+        ]
+      }
+    }
+  }
+</script>
+<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
+```
+
 
 # Props
 
