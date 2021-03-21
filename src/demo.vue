@@ -7,6 +7,13 @@
           v-model="value"
           :options="options"
         )
+      .example.autocomplete-search
+        .demo-title Autocomplete select search
+        advanced-search(
+          v-model="value"
+          :options="options"
+          selectMode
+        )
       .example.multiple-select-with-search
         .demo-title Multiple select with search
         advanced-search(

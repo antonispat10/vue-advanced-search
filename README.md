@@ -1,5 +1,6 @@
-# vue-advanced-search
+# vue2-advanced-search
 
+Forked version [vue-advanced-search](https://github.com/antonispat10/vue-advanced-search) by [@darkfriend](https://darkfriend.ru)
 
 ## Features:
 * Autocomplete search
@@ -9,10 +10,10 @@
 ## Install & basic usage
 
 ```bash
-npm install vue-advanced-search
+npm install vue2-advanced-search -S
 
 Add the css into your project 
-<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
+<style src="vue2-advanced-search/dist/AdvancedSearch.css"></style>
 ```
 
 ### Example 1: Autocomplete search
@@ -22,13 +23,12 @@ Add the css into your project
     <advanced-search
       v-model="model"
       :options="options"
-    >
-    </advanced-search>
+    />
   </div>
 </template>
 
 <script>
-  import Advanced-Search from 'vue-advanced-search'
+  import AdvancedSearch from 'vue2-advanced-search'
   export default {
     components: { AdvancedSearch },
     data () {
@@ -42,7 +42,7 @@ Add the css into your project
     }
   }
 </script>
-<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
+<style src="vue2-advanced-search/dist/AdvancedSearch.css"></style>
 ```
 
 ### Example 2: Multiple select with search
@@ -54,13 +54,12 @@ Add the css into your project
       :options="options"
       select
       multiple
-    >
-    </advanced-search>
+    />
   </div>
 </template>
 
 <script>
-  import Advanced-Search from 'vue-advanced-search'
+  import AdvancedSearch from 'vue2-advanced-search'
   export default {
     components: { AdvancedSearch },
     data () {
@@ -75,8 +74,39 @@ Add the css into your project
     }
   }
 </script>
-<style src="vue-advanced-search/dist/AdvancedSearch.css"></style>
+<style src="vue2-advanced-search/dist/AdvancedSearch.css"></style>
 ```
+
+### Example 3: Autocomplete search (async component)
+```vue
+<template>
+  <div>
+    <advanced-search
+      v-model="model"
+      :options="options"
+    />
+  </div>
+</template>
+
+<script>
+  export default {
+    components: {
+        AdvancedSearch: () => import('vue2-advanced-search'),
+    },
+    data () {
+      return {
+        model: null,
+        options: [
+            { label: 'label1', value: 'value1' },
+            { label: 'label2', value: 'value2' }
+        ]
+      }
+    }
+  }
+</script>
+<style src="vue2-advanced-search/dist/AdvancedSearch.css"></style>
+```
+
 
 # Props
 

@@ -1,8 +1,15 @@
 {
-  "name": "vue-advanced-search",
-  "version": "0.1.43",
+  "name": "vue2-advanced-search",
+  "version": "0.1.44.1",
   "private": false,
   "author": "Antonis Paterakis <antonispat10@gmail.com>",
+  "contributors": [
+    {
+      "name": "darkfriend",
+      "email": "darkfriend <hi@darkfriend.ru>",
+      "url": "https://darkfriend.ru"
+    }
+  ],
   "license": "MIT",
   "main": "dist/AdvancedSearch.umd.js",
   "unpkg": "dist/AdvancedSearch.umd.min.js",
@@ -12,7 +19,8 @@
   "keywords": [
     "vue",
     "autocomplete",
-    "search"
+    "search",
+    "select"
   ],
   "scripts": {
     "serve": "vue-cli-service serve src/dev.js",
@@ -21,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/antonispat10/vue-advanced-search"
+    "url": "https://github.com/darkfriend/vue-advanced-search"
   },
   "dependencies": {
     "babel-plugin-root-import": "^6.5.0",

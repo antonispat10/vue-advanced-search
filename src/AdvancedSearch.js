@@ -14,6 +14,11 @@ export default {
         required: false,
         default: 'Search'
       },
+      nullLabel: {
+        type: String,
+        required: false,
+        default: 'No available options'
+      },
       selectMode: {
         type: Boolean,
         required: false,
@@ -50,7 +55,7 @@ export default {
         const options = this.options.map(v => {
           if (v.label.indexOf(this.search) !== -1) return v
         }).filter(v => v)
-        if (!options.length) return [{ value: '', label: 'No available options'}]
+        if (!options.length) return [{ value: '', label: this.nullLabel}]
         return options
       },
       selectedOptions () {
@@ -67,7 +72,15 @@ export default {
           return this.labels.join(', ')
         }
         return this.search
-      }
+      },
+      inputValue: {
+        get() {
+          return this.value
+        },
+        set(val) {
+          this.$emit('input', val)
+        }
+      },
     },
     methods: {
       onInputClick ($event) {
@@ -92,10 +105,10 @@ export default {
       },
       onFocus () {
         if (this.selectMode) this.clickedOutside = false
-        if (!this.multiple) {
-          if (this.labels.length) this.search = ''
-          this.labels = ''
-        }
+        // if (!this.multiple) {
+        //   if (this.labels.length) this.search = ''
+        //   this.labels = ''
+        // }
       },
       setActiveClass (i, option) {
         let classList = []
@@ -121,16 +134,26 @@ export default {
               this.values.splice(findIndex, 1)
               this.labels.splice(findIndex, 1)
             }
+          } else {
+            const label = this.getValues(this.autoCompleteOptions[index].value)
+            this.labels = [label]
+            this.values = this.autoCompleteOptions[index].value
+            this.clickedOutside = true
+            this.enableInput = false
+            this.$refs.advancedInput.style.display = 'none'
           }
         } else if (!this.selectMode || (this.selectMode && !this.multiple)) {
           const label = this.getValues(this.autoCompleteOptions[index].value)
           this.labels = [label]
           this.values = this.autoCompleteOptions[index].value
           if (!this.values) return
+          this.search = this.autoCompleteOptions[index].label
           this.clickedOutside = true
           this.enableInput = false
           this.$refs.advancedInput.style.display = 'none'
         }
+        this.inputValue = this.values
+        // this.$refs.advancedInput.style.display = 'none'
         this.$emit('select', this.values)
       },
       onKeyPressed (event) {
