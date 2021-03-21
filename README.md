@@ -1,5 +1,6 @@
-# vue-advanced-search
+# vue2-advanced-search
 
+Forked version [vue-advanced-search](https://github.com/antonispat10/vue-advanced-search) by [@darkfriend](https://darkfriend.ru)
 
 ## Features:
 * Autocomplete search
