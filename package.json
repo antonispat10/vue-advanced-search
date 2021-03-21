@@ -3,6 +3,13 @@
   "version": "0.1.43",
   "private": false,
   "author": "Antonis Paterakis <antonispat10@gmail.com>",
+  "contributors": [
+    {
+      "name": "darkfriend",
+      "email": "darkfriend <hi@darkfriend.ru>",
+      "url": "https://darkfriend.ru"
+    }
+  ],
   "license": "MIT",
   "main": "dist/AdvancedSearch.umd.js",
   "unpkg": "dist/AdvancedSearch.umd.min.js",
